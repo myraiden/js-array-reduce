@@ -31,26 +31,20 @@ Examples:
 function vowelCount(str) {
     let vowelBase='aeiou'.split('');
     let stringCompare=str.toLowerCase().split('')
-    console.log(stringCompare);
+    let vowelArray={};
 
-    stringCompare.reduce(function(extractVowel,currentLetter){
-        let vowelArray=[];
-        
+    return stringCompare.reduce(function(extractVowel,currentLetter){
         vowelBase.forEach(function(vowelValue){
-            console.log(`${currentLetter}:${vowelValue}`);
-
             if(currentLetter===vowelValue){
-                //charArray.vowelValue=1;
-                vowelArray[vowelValue]=1;
-                
-                
-
+                if(vowelArray[vowelValue]===null || vowelArray[vowelValue]==undefined){
+                    vowelArray[vowelValue]=1;
+                    
+                }else{
+                    vowelArray[vowelValue]+=1;
+                }  
             }
-            
-        })
-        console.log(vowelArray);
-        //return vowelArray;
-        
+        })      
+        return extractVowel=vowelArray;
     },{})
 }
 
@@ -69,7 +63,16 @@ Examples:
        ]
 */
 
-function addKeyAndValue(arr, key, value) {}
+function addKeyAndValue(arr, key, value) {
+    
+    return arr.reduce(function(accObjects, currentObject){
+        let newObject={};
+        newObject[key]=value;
+        newObject['name']=currentObject['name'];
+        accObjects.push(newObject);
+        return accObjects;
+    },[])
+}
 
 /*
 Write a function called partition which accepts an array and a callback and returns an array with two arrays inside of it. The partition function should run the callback function on each value in the array and if the result of the callback function at that specific value is true, the value should be placed in the first subarray. If the result of the callback function at that specific value is false, the value should be placed in the second subarray. 
@@ -93,4 +96,15 @@ Examples:
     partition(names, isLongerThanThreeCharacters) // [['Elie', 'Colt', 'Matt'], ['Tim']]
 */
 
-function partition(arr, callback) {}
+function partition(arr, callback) {
+
+    return arr.reduce(function(accumPartition, currentPartition){
+        if(callback(currentPartition)===true){
+            accumPartition[0].push(currentPartition);
+        }else{
+            accumPartition[1].push(currentPartition);
+        }
+        return accumPartition;
+    },[[],[]]);
+
+}
